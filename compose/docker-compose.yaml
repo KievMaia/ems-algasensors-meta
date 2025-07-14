@@ -1,0 +1,17 @@
+services:
+  algasensors-rabbitmq:
+    image: rabbitmq:3.12-management
+    restart: no
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+      RABBITMQ_CONFIG_FILE: /etc/rabbitmq/rabbitmq.conf
+    volumes:
+      - algasensors-rabbitmq:/var/lib/rabbitmq/
+      - ./definitions.json:/etc/rabbitmq/definitions.json
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+volumes:
+  algasensors-rabbitmq:
