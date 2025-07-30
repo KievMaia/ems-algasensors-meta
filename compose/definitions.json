@@ -38,6 +38,13 @@
       "durable": true,
       "auto_delete": false,
       "arguments": {}
+    },
+    {
+      "name": "temperature-monitoring.alerting.v1.q",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
     }
   ],
   "bindings": [
@@ -45,6 +52,14 @@
       "source": "temperature-processing.temperature-received.v1.e",
       "vhost": "/",
       "destination": "temperature-monitoring.process-temperature.v1.q",
+      "destination_type": "queue",
+      "routing_key": "temperature.received",
+      "arguments": {}
+    },
+    {
+      "source": "temperature-processing.temperature-received.v1.e",
+      "vhost": "/",
+      "destination": "temperature-monitoring.alerting.v1.q",
       "destination_type": "queue",
       "routing_key": "temperature.received",
       "arguments": {}
